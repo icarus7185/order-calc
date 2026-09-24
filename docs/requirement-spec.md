@@ -3,7 +3,7 @@
 | Mục | Giá trị |
 |---|---|
 | Nguồn | [business-requirement.md](business-requirement.md) |
-| Phiên bản | 1.0 |
+| Phiên bản | 1.1 |
 | Ngày | 2026-09-24 |
 | Trạng thái | Đã chốt — toàn bộ câu hỏi mở đã được xác nhận (mục 9) |
 
@@ -15,6 +15,7 @@
 | 0.1 | Bản nháp đầu tiên |
 | 0.2 | Xác nhận: đơn giá chưa gồm VAT; dấu phân cách `,`; header tiếng Anh; %VAT nhận mọi giá trị; làm tròn 1 chữ số thập phân chỉ trên tổng hoá đơn |
 | 1.0 | Xác nhận: giới hạn 10.000 dòng dữ liệu (thêm mã lỗi `TOO_MANY_ROWS`); `total_after_tax = round(Σ amount_after_tax)`; chấp nhận toàn bộ giả định còn lại. Sửa lỗi cộng sai tổng VAT trong ví dụ mục 5.4 của bản 0.2 |
+| 1.1 | Thêm mã lỗi `MALFORMED_CSV` (phát hiện khi implement) |
 
 ---
 
@@ -253,6 +254,7 @@ public record ValidationError(
 | `EMPTY_FILE` | File | File rỗng, không có header |
 | `NO_DATA_ROWS` | File | Chỉ có header, không có dòng dữ liệu |
 | `TOO_MANY_ROWS` | File | Số dòng dữ liệu vượt 10.000; `lineNumber` là dòng vật lý của dòng dữ liệu thứ 10.001 |
+| `MALFORMED_CSV` | File | Dấu `"` mở không được đóng trước khi hết file; `lineNumber` là dòng bắt đầu bản ghi lỗi [THIẾT KẾ] |
 | `MISSING_COLUMN` | Header | Thiếu cột bắt buộc |
 | `DUPLICATE_COLUMN` | Header | Cột xuất hiện hơn 1 lần |
 | `UNKNOWN_COLUMN` | Header | Có cột không thuộc danh sách |
